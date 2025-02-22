@@ -1,19 +1,15 @@
-# Caso de mensajeria Point to Point
+**Historia de Usuario: InvalidMessage**
 
-## Historia de Usuario
-**Como** usuario del sistema,  
-**quiero** poder ejecutar el servicio fácilmente,  
-**para** poder realizar las tareas que me permitan interactuar con la aplicación de manera eficiente.
+**Como** desarrollador en una empresa de logística,  
+**quiero** detectar y gestionar mensajes inválidos en el sistema de mensajería basado en Redis,  
+**para** evitar que pedidos con datos incompletos o erróneos afecten la operación y asegurar un procesamiento eficiente de la información.  
 
-### Ejemplo:
-> María es una desarrolladora que trabaja en un equipo que utiliza el servicio para gestionar tareas. Necesita asegurarse de que el servicio funcione sin problemas y que las instrucciones sean claras para configurarlo correctamente.
+### **Ejemplo**  
+Carlos trabaja en una empresa de logística que gestiona miles de pedidos diarios a través de un sistema de mensajería basado en Redis. Sin embargo, algunos mensajes llegan con información incompleta o incorrecta, lo que provoca retrasos y errores en la asignación de pedidos.  
 
-## Instrucciones para Ejecutar el Servicio
+Para solucionar este problema, se desarrollará una funcionalidad que detecte mensajes inválidos, los almacene en Redis para su posterior análisis y notifique al equipo correspondiente. Esto permitirá que los errores se manejen de manera más eficiente, reduciendo el impacto en la operación y mejorando la calidad del servicio.
 
-Sigue los siguientes pasos para ejecutar el servicio en tu máquina local:
-
-### 1. Para ejecutar el proyecto, darle 
-make testc1
+## **Funcionamiento del sistema**
 
 
-### Respuesta Esperada:
+## **POSTMAN**
