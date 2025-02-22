@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "07fd3cff-f98b-4ff8-9f67-a57bf3cbb031",
+		"name": "C1_PointToPoint",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "6967576"
+	},
+	"item": [
+		{
+			"name": "SendParcel",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 5,\n    \"from\": \"city a\",\n    \"to\": \"city b\",\n    \"size\": \"10 kg\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:80/"
+			},
+			"response": []
+		}
+	]
+}

@@ -32,3 +32,4 @@ Desde Postman enviar la siguiente solicitud:
 
 ## POSTMAN: Peticiones
 
+Ver archivo `C1_PointToPoint.postman_collection.json`
