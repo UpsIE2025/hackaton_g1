@@ -1,4 +1,4 @@
-# Proyecto NombreDelProyecto
+# Caso de mensajeria Point to Point
 
 ## Historia de Usuario
 **Como** usuario del sistema,  
@@ -12,9 +12,8 @@
 
 Sigue los siguientes pasos para ejecutar el servicio en tu máquina local:
 
-### 1. Clonar el repositorio
-Primero, clona el repositorio en tu máquina local:
+### 1. Para ejecutar el proyecto, darle 
+make testc1
 
-```bash
-git clone https://github.com/usuario/NombreDelProyecto.git
-cd NombreDelProyecto
+
+### Respuesta Esperada:
