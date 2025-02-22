@@ -13,6 +13,9 @@ consumer = Consumer(conf)
 # Suscribirse al topic
 consumer.subscribe(['inventory-updates'])
 
+# Imprimir mensaje inicial indicando que está esperando los mensajes
+print("Esperando control de inventario...")
+
 # Función para procesar los mensajes
 def process_message(message):
     data = json.loads(message.value().decode('utf-8'))
