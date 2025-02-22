@@ -1,3 +1,7 @@
-auth\javaredis\RedisService.class
-auth\javaredis\JavaRedis.class
+auth\javaredis\JavaRedis$GetInvalidMessagesHandler.class
 auth\javaredis\MessageProcessor.class
+auth\javaredis\JavaRedis$GetValidMessagesHandler.class
+auth\javaredis\RedisController.class
+auth\javaredis\RedisService.class
+auth\javaredis\JavaRedis$SendMessageHandler.class
+auth\javaredis\JavaRedis.class
