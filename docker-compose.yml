@@ -18,6 +18,8 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER
       # Required for a single node cluster
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CREATE_TOPICS: "c3_fuel-topic,c3_speed-topic,c3_engine-status-topic,c3_doors-status-topic"
+
     networks:
       - app_network
   redis:
