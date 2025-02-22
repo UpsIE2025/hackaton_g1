@@ -3,9 +3,9 @@ import json
 
 # Configuración del consumidor
 conf = {
-    'bootstrap.servers': 'localhost:9092',  # Dirección de tu Kafka desde Docker (localhost)
-    'group.id': 'inventory-consumers',  # El grupo de consumidores
-    'auto.offset.reset': 'earliest'  # Leer desde el principio
+    'bootstrap.servers': 'localhost:9092',  # Kafka desde Docker (localhost)
+    'group.id': 'inventory-consumers',  # Topico (grupo de consumidores)
+    'auto.offset.reset': 'earliest'  
 }
 
 consumer = Consumer(conf)
