@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/Shopify/sarama"
+	"github.com/IBM/sarama"
 )
 
 // Función para crear un productor de Kafka
@@ -50,7 +50,7 @@ func main() {
 		"c3_fuel-topic":          "50",     // En porcentaje; Datos del sensor de gasolina
 		"c3_speed-topic":         "80",     // En k,/h; Datos del sensor de velocidad
 		"c3_engine-status-topic": "true",   // Datos del sensor de motor
-		"c3_doors-status-topic":  "001101", // En binario para conocer puertas (5 puertas) Datos del sensor de puertas
+		"c3_doors-status-topic":  "111111", // En binario para conocer puertas (5 puertas) Datos del sensor de puertas
 	}
 
 	// Enviar los datos de los sensores a sus respectivos topics
