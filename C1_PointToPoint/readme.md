@@ -1,4 +1,4 @@
-# Caso de mensajeria Point to Point
+# Proyecto NombreDelProyecto
 
 ## Historia de Usuario
 **Como** usuario del sistema,  
@@ -14,6 +14,3 @@ Sigue los siguientes pasos para ejecutar el servicio en tu máquina local:
 
 ### 1. Para ejecutar el proyecto, darle 
 make testc1
-
-
-### Respuesta Esperada:

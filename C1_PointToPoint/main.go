@@ -4,10 +4,13 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/redis/go-redis/v9"
 )
 
 func main() {
+	godotenv.Load()
+
 	rdb := redis.NewClient(&redis.Options{
 		Addr: "redis:6379",
 	})
