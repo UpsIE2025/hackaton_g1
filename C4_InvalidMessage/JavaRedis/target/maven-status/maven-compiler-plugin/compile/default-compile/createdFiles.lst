@@ -1,0 +1,3 @@
+auth\javaredis\RedisService.class
+auth\javaredis\JavaRedis.class
+auth\javaredis\MessageProcessor.class
