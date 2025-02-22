@@ -31,7 +31,7 @@ El sistema aprovechará **Kafka** para garantizar que los eventos de inventario 
 
 2. **Kafka Producer**:
    - El **Producer** es responsable de enviar los eventos de cambio de inventario a Kafka. Cada vez que un producto cambie de estado (por ejemplo, se vuelva disponible o se agote), el **Producer** enviará un mensaje al **topic** `inventory-updates`.
-   - El mensaje incluirá detalles como el `product_id`, `status`, y la `timestamp` de la actualización.
+   - El mensaje incluirá detalles como el `product_id`, y `status` de la actualización.
 
 3. **Kafka Consumer**:
    - Los **Consumers** (empleados de ventas, administradores, y clientes) se suscribirán a los eventos del topic `inventory-updates` para recibir las actualizaciones correspondientes.
