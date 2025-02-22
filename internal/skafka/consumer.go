@@ -11,7 +11,7 @@ import (
 
 // Consumer ...
 type Consumer struct {
-	c sarama.Consumer
+	C sarama.Consumer
 }
 
 // NewConsumer ...
@@ -23,17 +23,17 @@ func NewConsumer(kafkaAddr string) (*Consumer, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &Consumer{c: consumer}, nil
+	return &Consumer{C: consumer}, nil
 }
 
 // Close ...
 func (c *Consumer) Close() {
-	c.c.Close()
+	c.C.Close()
 }
 
 // Subscribe ...
 func (c *Consumer) Subscribe(topic string, handler func(m *sarama.ConsumerMessage)) error {
-	partition, err := c.c.ConsumePartition(topic, 0, sarama.OffsetNewest)
+	partition, err := c.C.ConsumePartition(topic, 0, sarama.OffsetNewest)
 	if err != nil {
 		return err
 	}

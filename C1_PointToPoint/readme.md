@@ -1,19 +1,18 @@
 # Proyecto NombreDelProyecto
 
 ## Historia de Usuario
-**Como** usuario del sistema,  
+**Como** un vehiculo que tiene varios lectores tags,  
 **quiero** poder enviar un mensaje a través de un canal punto a punto,
-**para** que solo el destinatario especificado reciba el mensaje y lo consuma de manera eficiente, sin interferencias de otros
+**para** que solo el servidor que autoriza salidas de un lector en especifico se autorice y debite saldo. 
  
 ### Ejemplo:
-> Imagina que eres un operador de un sistema de mensajería dentro de un entorno de control vehicular. Necesitas enviar un mensaje de autorización para que un vehículo pueda acceder a una zona restringida, pero no quieres que otros operadores reciban y procesen el mensaje, solo el sistema de acceso adecuado. En este caso, tú envías el mensaje a través de un canal punto a punto, y el sistema de acceso correcto recibe el mensaje y autoriza el acceso, mientras que los demás sistemas no interactúan con este mensaje.
+> Soy un vehiculo que tiene un tag pero este puede ser leido por varios lectores a la salida, y este tag tiene que unicamente consumir un determinado servicio para el debito de su saldo. Entonces solo se deberia consumir esta consulta en un canal punto a punto. 
 
 ## Respuesta esperada
 Respuesta esperada:
 El mensaje es enviado a través del canal punto a punto.
-Solo el receptor autorizado (en este caso, el sistema de acceso correspondiente) consume el mensaje.
+Solo el receptor autorizado consume el mensaje.
 Los demás sistemas no reciben ni consumen el mensaje, lo que garantiza que solo un receptor procese el acceso.
-
 
 ## Como se ejecuta el proyecto
 
