@@ -31,7 +31,7 @@ El sistema aprovechará **Kafka** para garantizar que los eventos de inventario 
 
 2. **Kafka Producer**:
    - El **Producer** es responsable de enviar los eventos de cambio de inventario a Kafka. Cada vez que un producto cambie de estado (por ejemplo, se vuelva disponible o se agote), el **Producer** enviará un mensaje al **topic** `inventory-updates`.
-   - El mensaje incluirá detalles como el `product_id`, `status`, y la `timestamp` de la actualización.
+   - El mensaje incluirá detalles como el `product_id`, y `status` de la actualización.
 
 3. **Kafka Consumer**:
    - Los **Consumers** (empleados de ventas, administradores, y clientes) se suscribirán a los eventos del topic `inventory-updates` para recibir las actualizaciones correspondientes.
@@ -44,27 +44,18 @@ El sistema aprovechará **Kafka** para garantizar que los eventos de inventario 
 5. **Kafka Topic**:
    - El **topic** `inventory-updates` será utilizado para distribuir todos los eventos de inventario a los suscriptores.
 
+6. **El archivo `app.py`**:
+   - El archivo `app.py` es el servidor **Flask** que actúa como el **Producer** en el sistema. Se encarga de recibir solicitudes HTTP en el endpoint `/send_notification` para registrar los cambios en el inventario de productos. Una vez recibe la solicitud, envía los detalles del producto y su estado al **topic `inventory-updates`** de Kafka. Los **Consumers** suscritos recibirán estos mensajes en tiempo real.
+
 ## Cómo validar desde POSTMAN: Peticiones
 
 Aunque **Postman** no es la herramienta ideal para interactuar directamente con **Kafka**, puedes crear endpoints RESTful para simular la interacción con el sistema de Kafka mediante HTTP.
 
 ### Validación con Kafka:
 
-1. **Suscripción a un canal de Kafka (Simulando un Suscriptor)**:
-   - Usamos un servicio que consuma mensajes de un **topic** de Kafka. Puedes crear una API que permita a los usuarios suscribirse a cambios de inventario.
-   - **POST** `http://localhost:5000/api/subscribe`
-     - Body:
-     ```json
-     {
-       "user_id": "123",
-       "topic": "inventory-updates"
-     }
-     ```
-   Este endpoint simula la suscripción de un usuario a un canal de Kafka.
-
-2. **Publicación de un evento de inventario (Publisher de Kafka)**:
+1 **Publicación de un evento de inventario (Publisher de Kafka)**:
    - El **Publisher** publicará el evento de inventario en Kafka mediante una API que se encargue de enviar el evento al **topic**.
-   - **POST** `http://localhost:5000/api/inventory/update`
+   - **POST** `http://localhost:5000/send_notification`
      - Body:
      ```json
      {
