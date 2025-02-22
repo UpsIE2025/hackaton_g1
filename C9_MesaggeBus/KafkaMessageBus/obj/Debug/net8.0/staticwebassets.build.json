@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Q/wfaLkkFqglbEGO+CEuAsJvx8tpUn6nEJ+k+IU6FJA=",
+  "Source": "KafkaMessageBus",
+  "BasePath": "_content/KafkaMessageBus",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
