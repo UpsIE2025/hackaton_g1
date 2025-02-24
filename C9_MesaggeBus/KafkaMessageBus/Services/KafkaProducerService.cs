@@ -8,22 +8,27 @@ public class KafkaProducerService
 {
     private readonly string _bootstrapServers;
     private readonly string _topic;
+    private readonly IProducer<Null, string> _producer;
 
     public KafkaProducerService(IConfiguration configuration)
-    {      
+    {
         _bootstrapServers = configuration["Kafka:BootstrapServers"] ?? throw new ArgumentNullException("BootstrapServers is required.");
         _topic = configuration["Kafka:Topic"] ?? throw new ArgumentNullException("Topic is required.");
+
+        var config = new ProducerConfig { BootstrapServers = _bootstrapServers };
+        _producer = new ProducerBuilder<Null, string>(config).Build();
     }
 
     public async Task SendMessageAsync<T>(T message)
     {
-        var config = new ProducerConfig { BootstrapServers = _bootstrapServers };
-
-        using var producer = new ProducerBuilder<Null, string>(config).Build();
         var jsonMessage = JsonSerializer.Serialize(message);
-
-        await producer.ProduceAsync(_topic, new Message<Null, string> { Value = jsonMessage });
-
+        await _producer.ProduceAsync(_topic, new Message<Null, string> { Value = jsonMessage });
         Console.WriteLine($"[Kafka Producer] Mensaje enviado: {jsonMessage}");
+    }
+
+    public void Dispose()
+    {
+        _producer.Flush();
+        _producer.Dispose();
     }
 }

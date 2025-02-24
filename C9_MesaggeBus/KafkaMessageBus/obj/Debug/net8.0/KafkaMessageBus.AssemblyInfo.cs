@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KafkaMessageBus")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfd57260b213df9386733903672677be3c312a60")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e075e99729e03d80985e3b455f7d91f4448c681e")]
 [assembly: System.Reflection.AssemblyProductAttribute("KafkaMessageBus")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KafkaMessageBus")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

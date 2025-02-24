@@ -1,5 +1,4 @@
 using System;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
@@ -9,54 +8,51 @@ using StackExchange.Redis;
 
 public class KafkaConsumerService : BackgroundService
 {
-    private readonly string _bootstrapServers;
-    private readonly string _topic;
     private readonly IConsumer<Ignore, string> _consumer;
+    private readonly IDatabase _redisDb;
 
-    public KafkaConsumerService(IConfiguration configuration)
+    public KafkaConsumerService(IConfiguration configuration, IConnectionMultiplexer redis)
     {
-        _bootstrapServers = configuration["Kafka:BootstrapServers"] ?? "localhost:9092";
-        _topic = configuration["Kafka:Topic"] ?? "default_topic";
+        var bootstrapServers = configuration["Kafka:BootstrapServers"] ?? "localhost:9092";
+        var topic = configuration["Kafka:Topic"] ?? "default_topic";
+
+        _redisDb = redis.GetDatabase();
 
         var config = new ConsumerConfig
         {
-            BootstrapServers = _bootstrapServers,
+            BootstrapServers = bootstrapServers,
             GroupId = "test-group",
             AutoOffsetReset = AutoOffsetReset.Earliest
         };
 
         _consumer = new ConsumerBuilder<Ignore, string>(config).Build();
-        _consumer.Subscribe(_topic);
+        _consumer.Subscribe(topic);
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var config = new ConsumerConfig
-    {
-        BootstrapServers = _bootstrapServers,
-        GroupId = "marketing-consumer-group",
-        AutoOffsetReset = AutoOffsetReset.Earliest
-    };
-
-    using var consumer = new ConsumerBuilder<Ignore, string>(config).Build();
-    consumer.Subscribe(_topic);
-
-    while (!stoppingToken.IsCancellationRequested)
-    {
-        try
+        while (!stoppingToken.IsCancellationRequested)
         {
-            var consumeResult = await Task.Run(() => consumer.Consume(stoppingToken), stoppingToken); // Usamos Task.Run para hacer la operación asincrónica
-            var message = consumeResult.Message.Value;
+            try
+            {
+                var consumeResult = _consumer.Consume(stoppingToken);
+                var message = consumeResult.Message.Value;
 
-            Console.WriteLine($"[Kafka Consumer] Mensaje recibido: {message}");
+                Console.WriteLine($"[Kafka Consumer] Mensaje recibido: {message}");
 
-            // Guardar en Redis
-            await _redisDb.ListLeftPushAsync("marketing-events", message);
-        }
-        catch (ConsumeException ex)
-        {
-            Console.WriteLine($"[Kafka Consumer] Error: {ex.Error.Reason}");
+                await _redisDb.ListLeftPushAsync("marketing-events", message);
+            }
+            catch (ConsumeException ex)
+            {
+                Console.WriteLine($"[Kafka Consumer] Error: {ex.Error.Reason}");
+            }
         }
     }
+
+    public override void Dispose()
+    {
+        _consumer.Close();
+        _consumer.Dispose();
+        base.Dispose();
     }
 }
