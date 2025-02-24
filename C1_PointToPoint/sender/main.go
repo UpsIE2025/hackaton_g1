@@ -1,6 +1,10 @@
 package main
 
 import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log/slog"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -12,21 +16,29 @@ func main() {
 	godotenv.Load()
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr: "redis:6379",
+		Addr: "localhost:6379",
 	})
 	defer rdb.Close()
 
 	r := gin.Default()
 
-	r.POST("/publish", func(ctx *gin.Context) {
+	r.POST("/", func(ctx *gin.Context) {
 		var req struct {
-			Message string `json:"message"`
+			ID   int    `json:"id"`
+			From string `json:"from"`
+			To   string `json:"to"`
+			Size string `json:"size"`
 		}
 		if err := ctx.ShouldBindBodyWithJSON(&req); err != nil {
+			fmt.Println(err)
 			ctx.AbortWithStatus(http.StatusBadRequest)
 			return
 		}
-
+		data, _ := json.Marshal(&req)
+		err := rdb.RPush(context.Background(), "parcels", string(data)).Err()
+		if err != nil {
+			slog.Error(err.Error())
+		}
 		ctx.Status(http.StatusOK)
 	})
 

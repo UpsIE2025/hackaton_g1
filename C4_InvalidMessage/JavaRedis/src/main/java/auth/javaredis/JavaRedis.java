@@ -18,6 +18,7 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.List;
+import org.json.JSONObject;
 import redis.clients.jedis.Jedis;
 
 /**
@@ -41,7 +42,6 @@ public class JavaRedis {
         processor.process(invalidMessage);*
         
     }*/
-    
     private static final String REDIS_HOST = "http://127.0.0.1:6379";
     private static Jedis jedis;
 
@@ -58,6 +58,7 @@ public class JavaRedis {
     }
 
     static class SendMessageHandler implements HttpHandler {
+
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             if ("POST".equals(exchange.getRequestMethod())) {
@@ -78,6 +79,7 @@ public class JavaRedis {
     }
 
     static class GetValidMessagesHandler implements HttpHandler {
+
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             List<String> messages = jedis.lrange("valid_messages", 0, -1);
@@ -86,6 +88,7 @@ public class JavaRedis {
     }
 
     static class GetInvalidMessagesHandler implements HttpHandler {
+
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             List<String> messages = jedis.lrange("invalid_messages", 0, -1);
@@ -94,7 +97,30 @@ public class JavaRedis {
     }
 
     private static boolean isInvalidMessage(String message) {
-        return message.contains("\"id\":null") || message.contains("\"sensor\":\"\"") || message.contains("\"value\":null");
+        try {
+            JSONObject json = new JSONObject(message);
+
+            // Verificar si existen las claves esperadas
+            if (!json.has("id") || !json.has("sensor") || !json.has("value")) {
+                return true;
+            }
+
+            // Validar que los valores no sean null o vacíos
+            if (json.isNull("id") || json.get("id").toString().trim().isEmpty()) {
+                return true;
+            }
+            if (json.isNull("sensor") || json.getString("sensor").trim().isEmpty()) {
+                return true;
+            }
+            if (json.isNull("value") || json.get("value").toString().trim().isEmpty()) {
+                return true;
+            }
+
+            return false; // Si todas las validaciones pasan, el mensaje es válido
+
+        } catch (Exception e) {
+            return true; // Si hay un error en el formato del JSON, se considera inválido
+        }
     }
 
     private static void sendResponse(HttpExchange exchange, String response, int statusCode) throws IOException {

@@ -6,7 +6,7 @@
 **PARA** que las alertas lleguen al canal adecuado según el tipo de notificación.
 
 ## Criterios de Aceptacion
-**Dado** que un cliente realiza una compra en la tienda online,  
+**DADO** que un cliente realiza una compra en la tienda online,  
 **CUANDO** el sistema genera una notificación de "Pedido Confirmado"  
 **ENTONCES** el adaptador debe enviar un email con los detalles del pedido al cliente y un SMS si el cliente optó por recibir alertas móviles.
 

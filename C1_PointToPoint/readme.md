@@ -1,22 +1,35 @@
 # Proyecto NombreDelProyecto
 
 ## Historia de Usuario
-**Como** un vehiculo que tiene varios lectores tags,  
-**quiero** poder enviar un mensaje a través de un canal punto a punto,
-**para** que solo el servidor que autoriza salidas de un lector en especifico se autorice y debite saldo. 
- 
-### Ejemplo:
-> Soy un vehiculo que tiene un tag pero este puede ser leido por varios lectores a la salida, y este tag tiene que unicamente consumir un determinado servicio para el debito de su saldo. Entonces solo se deberia consumir esta consulta en un canal punto a punto. 
+**Como** líder de un grupo de desarrollo para una empresa de encomiendas,  
+**quiero** enviar las encomiendas a un solo receptor,  
+**para** para que una misma encomienda no se procese más de una vez por varios receptores.
 
 ## Respuesta esperada
-Respuesta esperada:
-El mensaje es enviado a través del canal punto a punto.
-Solo el receptor autorizado consume el mensaje.
-Los demás sistemas no reciben ni consumen el mensaje, lo que garantiza que solo un receptor procese el acceso.
+Cada encomienda debe ser procesada por un solo receptor.
+Cada encomienda solo debe enviarse a un solo receptor.
 
 ## Como se ejecuta el proyecto
 
+```bash
+# Levantar 2 receptores con
+go run receiver/main.go 
 
+# Ejecutar el emisor (el cual contiene un servidor http)
+go run sender/main.go
+```
+
+Desde Postman enviar la siguiente solicitud:
+`POST http://localhost:80/`
+```json
+{
+    "id": 1,
+    "from": "city a",
+    "to": "city b",
+    "size": "10 kg"
+}
+```
 
 ## POSTMAN: Peticiones
 
+Ver archivo `C1_PointToPoint.postman_collection.json`

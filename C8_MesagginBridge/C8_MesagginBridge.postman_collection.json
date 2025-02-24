@@ -1,0 +1,28 @@
+{
+	"info": {
+		"_postman_id": "c1802e1a-8867-414f-a3f3-3683a3ae35fe",
+		"name": "C8_MesagginBridge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "6967576"
+	},
+	"item": [
+		{
+			"name": "AddOrder",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"products\": [\n        {\n            \"id\": 201,\n            \"name\": \"pelota\",\n            \"quantity\": 3\n        },\n        {\n            \"id\": 205,\n            \"name\": \"mesa\",\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:80/"
+			},
+			"response": []
+		}
+	]
+}
