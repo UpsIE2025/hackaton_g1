@@ -47,7 +47,3 @@ Se introduce un **Message Bus** como intermediario entre todas las plataformas p
 
 Sigue los siguientes pasos para ejecutar el servicio en tu máquina local:
 
-### 1. Para ejecutar el proyecto, darle 
-make testc1
-
-### Respuesta Esperada:
